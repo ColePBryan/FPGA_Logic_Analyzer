@@ -33,7 +33,7 @@
 #*****************************************************************************************
 
 # Set the reference directory for source file relative paths (by default the value is script directory path)
-set origin_dir "."
+set origin_dir [file dirname [info script]]
 
 # Use origin directory path location variable, if specified in the tcl shell
 if { [info exists ::origin_dir_loc] } {
@@ -96,11 +96,8 @@ if { $::argc > 0 } {
   }
 }
 
-# Set the directory path for the original project from where this script was exported
-set orig_proj_dir "[file normalize "$origin_dir/../../../Vivado_FPGA_logic_analyzer"]"
-
 # Create project
-create_project ${_xil_proj_name_} ./${_xil_proj_name_} -part xc7a100tcsg324-1
+create_project FPGA_Logic_Analyzer $origin_dir/FPGA_Logic_Analyzer
 
 # Set the directory path for the new project
 set proj_dir [get_property directory [current_project]]
